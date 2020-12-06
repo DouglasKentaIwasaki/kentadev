@@ -2,39 +2,86 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/styles/default.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.4.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/icon.css">
 
     <meta charset="utf-8" />
     <title>KentaDEV</title>
 </head>
 
 <body>
-    <header>
-        <header class="header">
-            <div class="gradient content">
-                <div class="logo">
-                    <img src="">
-                </div>
-                <pre><code class="c">#include <stdio.h>
-int main(){
-    int a = 0;
-    scanf("%d", &a);
-    printf("teste: %d", a);
-    return 1;
-}</code></pre>
-
+    <div class="background"></div>
+    <div class="shadow"></div>
+    <div class="menu">
+        
+    <a class="menu-close" href="javascript:closeMenu();"><i class="icon-circle-close"></i></a>
+        <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+            <div class="flipper">
+                <img class="front" src="img/code.png">
+                <img class="back" src="img/me.jpg">
             </div>
-        </header>
-        <main>
+        </div>
+        <p class="name">Kenta</p>
+        <hr>
+        <p class="bio">Estudante, desenvolvedor e apreciador de uma boa música</p>
+        <hr>
+        <ul class="navigation">
+            <li>
+                <a>Início</a>
+            </li>
+            <li>
+                <a href="javascript:loadPage('pages/about.html');">Sobre</a>
+            </li>
+        </ul>
+        <div class="social">
+            <a href="https://github.com/DouglasKentaIwasaki" target="_blank"><i class="icon-circle-lg"></i>
+                <i class="icon-github-lg"></i></a>
+            <a href="https://www.linkedin.com/in/douglas-kenta-iwasaki/" target="_blank"><i class="icon-square-lg"></i>
+                <i class="icon-linkedin-lg"></i></a>
+        </div>
+        <div class="search">
+            <input type="text" placeholder="Pesquise por meio de tags">
+            <!--<a><i class="icon-search"></i></a>-->
+        </div>
+        <div class="tags">
+            <ul class="selected">
+            </ul>
+            <ul class="data">
+                <li><a id="2">Algoritmo</a></li>
+                <li><a id="1">C</a></li>
+            </ul>
+        </div>
+    </div>
 
-        </main>
-        <footer class="footer"></footer>
+    <a class="menu-open" href="javascript:openMenu();"><i class="icon-menu"></i></a>
+    <main class="main">
+        
+        <div class="boxes">
+            
+        </div>
+        <div class="article">
+        </div>
+        
+        
 
-        <script src="../libs/jquery-3.5.1.min.js"></script>
-        <script src="../js/script.js"></script>
+        <nav class="more">
+            <a class="next"><i class="icon-circle-plus"></i></a>
+        </nav>
+        <nav class="loader">
+            <div><i class="icon-loader"></i></div>
+        </nav>
+        <nav class="finish">Você chegou ao fim :(</nav>
+
+    </main>
+
+    <script src="libs/jquery/jquery-3.5.1.min.js"></script>
+    <script src="js/script.js"></script>
+
+    <link rel="stylesheet" href="libs/highlight10.4.0/css/default.min.css">
+    <script src="libs/highlight10.4.0/js/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </body>
 
 </html>
