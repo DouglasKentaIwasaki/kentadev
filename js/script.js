@@ -88,6 +88,8 @@ function showPage(page) {
         $('.main > .article').slideDown(300);
     if ($('.main > .boxes').is(":visible"))
         $('.main > .boxes').hide(300);
+    if($(window).width() <= 980)
+        closeMenu();
 }
 function showBox(page) {
     $('.main > .boxes').html(page);
