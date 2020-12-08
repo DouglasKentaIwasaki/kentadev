@@ -30,6 +30,16 @@ p {
     font-size  : var(--font-size);
 }
 
+/*--remove highlight--*/
+input,
+textarea,
+button,
+select,
+a {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/*--remove highlight--*/
 
 a {
     text-decoration: none;
