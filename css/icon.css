@@ -22,6 +22,8 @@
   -webkit-font-smoothing : antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
 .icon-circle-close:before {
   content: "\e900";
 }
@@ -31,39 +33,42 @@
 .icon-circle-load:before {
   content: "\e902";
 }
-.icon-circle-minus:before {
+.icon-circle-menu:before {
   content: "\e903";
 }
-.icon-circle-plus:before {
+.icon-circle-minus:before {
   content: "\e904";
 }
-.icon-close:before {
+.icon-circle-plus:before {
   content: "\e905";
 }
-.icon-github:before {
+.icon-close:before {
   content: "\e906";
 }
-.icon-github-lg:before {
+.icon-github:before {
   content: "\e907";
 }
-.icon-linkedin:before {
+.icon-github-lg:before {
   content: "\e908";
 }
-.icon-linkedin-lg:before {
+.icon-linkedin:before {
   content: "\e909";
 }
-.icon-load:before {
+.icon-linkedin-lg:before {
   content: "\e90a";
 }
-.icon-loader:before {
+.icon-load:before {
   content: "\e90b";
 }
-.icon-menu:before {
+.icon-loader:before {
   content: "\e90c";
 }
-.icon-search:before {
+.icon-menu:before {
   content: "\e90d";
 }
-.icon-square-lg:before {
+.icon-search:before {
   content: "\e90e";
+}
+.icon-square-lg:before {
+  content: "\e90f";
 }

@@ -9,9 +9,11 @@
 
     --font-family: "Roboto";
 }
-body{
+
+body {
     overflow-x: hidden;
 }
+
 body,
 ul,
 li,
@@ -51,16 +53,17 @@ input {
 }
 
 .menu {
-    margin    : 0px 50px 0px 50px;
-    position  : fixed;
-    width     : 280px;
-    max-width : 100%;
-    height    : 100vh;
-    max-height: 100%;
-    z-index   : 2;
-    text-align: center;
-    overflow  : auto;
-    color     : var(--menu-color);
+    background-color: seagreen;
+    margin          : 0px 50px 0px 50px;
+    position        : fixed;
+    width           : 280px;
+    max-width       : 100%;
+    height          : 100vh;
+    max-height      : 100%;
+    z-index         : 2;
+    text-align      : center;
+    overflow        : auto;
+    color           : var(--menu-color);
 
 }
 
@@ -232,12 +235,8 @@ input {
     transform: rotateY(180deg);
 }
 
-.flip-container {
-    padding: 4px;
-}
-
-.front,
-.back {
+.flipper>.front,
+.flipper>.back {
     border-radius: 50px;
     width        : 100px;
     height       : 100px;
@@ -257,8 +256,8 @@ input {
 }
 
 /* esconde o verso durante a animação */
-.front,
-.back {
+.flipper>.front,
+.flipper>.back {
     backface-visibility: hidden;
     position           : absolute;
     top                : 0;
@@ -267,7 +266,7 @@ input {
 }
 
 /* frente posicionada sobre o verso */
-.front {
+.flipper>.front {
     z-index: 2;
 }
 
@@ -297,13 +296,11 @@ input {
 
 
 .main {
-    position   : absolute;
-    margin-top : 30px;
-    margin-left: 380px;
-    width      : calc(100vw - 430px);
-    max-width  : 100%;
-    z-index    : 1;
-    color      : var(--box-color-dark);
+    width  : calc(100% - 410px);
+    z-index: 1;
+    margin : 0px 50px 0px 370px;
+    color  : var(--box-color-dark);
+    padding: 30px 0px 30px 0px;
 }
 
 .main>.boxes>.box {
@@ -311,23 +308,24 @@ input {
     background-color: white;
     border-radius   : 5px;
     box-shadow      : 0px 0px 5px 0px;
-    margin          : 20px 5px 20px 5px;
+    margin          : 0px 5px 20px 5px;
     transition      : all 0.1s linear;
 }
 
 .main>.boxes>.box:hover {
-    width        : (100%);
-    margin       : 20px -5px 20px -5px;
+    width : (100%);
+    margin: 0px -5px 20px -5px;
 }
 
 .main>.boxes>.box>.content {
-    padding : 15px;
-    transition      : all 0.1s linear;
+    padding   : 15px;
+    transition: all 0.1s linear;
 }
+
 .main>.boxes>.box:hover>.content {
-    margin-left: 10px;
+    margin-left : 10px;
     margin-right: 10px;
-    position: relative;
+    position    : relative;
 }
 
 .main .title {
@@ -340,7 +338,8 @@ input {
     margin-bottom: 5px;
 
 }
-.main p{
+
+.main p {
     text-indent: 15px;
 }
 
@@ -370,7 +369,7 @@ input {
 }
 
 .main>.boxes>.box>.read {
-    margin-top                : -10px;
+    margin-top                : 0px;
     text-align                : center;
     border-bottom-left-radius : 5px;
     border-bottom-right-radius: 5px;
@@ -392,118 +391,124 @@ input {
 }
 
 
-.main>.article{
-    display: none;
-    padding : 15px;
+.main>.article {
+    display         : none;
+    padding         : 15px;
     width           : (100% - 10px);
     background-color: white;
     border-radius   : 5px;
     box-shadow      : 0px 0px 5px 0px;
-    margin          : 20px 5px 20px 5px;
+    margin          : 0px 5px 0px 5px;
     transition      : all 0.1s linear;
 }
 
-.main>.more{
+.main>.more {
     display: none;
-    margin: 0 auto;
-    width: fit-content;
+    margin : 0 auto;
+    width  : fit-content;
 
 }
-.main>.more>.next{
+
+.main>.more>.next {
     background-color: rgba(255, 255, 255, 0.5);
-    color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 0px;
-    width: 50px;
-    height: 50px;
-    font-size: 45px ;
-    line-height: 40px;
+    color           : rgba(0, 0, 0, 0.5);
+    border-radius   : 50%;
+    display         : flex;
+    flex-direction  : row;
+    justify-content : center;
+    align-items     : center;
+    padding         : 0px;
+    width           : 50px;
+    height          : 50px;
+    font-size       : 45px;
+    line-height     : 40px;
     transition      : all 0.1s linear;
     box-shadow      : 0px 0px 5px 0px;
 }
-.main>.more:hover>.next{
+
+.main>.more:hover>.next {
     background-color: white;
-    color: var(--highlight-translucid-2);
-    
+    color           : var(--highlight-translucid-2);
+
 }
 
-.main>.loader{
+.main>.loader {
     display: none;
-    margin: 0 auto;
-    width: fit-content;
+    margin : 0 auto;
+    width  : fit-content;
 
 }
-.main>.loader>div{
+
+.main>.loader>div {
     background-color: white;
-    color: var(--highlight-translucid-2);
-    border-radius: 50%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    
-    width: 50px;
-    height: 50px;
-    font-size: 45px ;
+    color           : var(--highlight-translucid-2);
+    border-radius   : 50%;
+    display         : flex;
+    flex-direction  : row;
+    justify-content : center;
+    align-items     : center;
+
+    width      : 50px;
+    height     : 50px;
+    font-size  : 45px;
     line-height: 40px;
-    animation: loading 0.8s linear infinite;
-    box-shadow      : 0px 0px 5px 0px;
+    animation  : loading 0.8s linear infinite;
+    box-shadow : 0px 0px 5px 0px;
 
 }
-.main>.finish{
-    color:var(--menu-color);
+
+.main>.finish {
+    color : var(--menu-color);
     margin: 0 auto;
-    width: fit-content;
+    width : fit-content;
 }
-.menu-open{
-    border-radius: 50%;
-    display: none;
+
+    
+
+main>.menu-open {
     position: fixed;
-    width: fit-content;
+    bottom: 20px;
+    right: 20px;
 
-    
-    justify-content: center;
-    align-items: center;
-    
-    color: var(--highlight-translucid-2);
-    background-color: rgba(255, 255, 255, 0.8);
-    margin-top: 5px;
-    margin-left: 45px;
-    width: 45px;
-    height: 45px;
-    font-size: 40px ;
-    line-height: 35px;
-    z-index: 5;
-    transition      : all 0.1s linear;
-    box-shadow      : 0px 0px 5px 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    color           : var(--highlight-translucid-2);
+    border-radius   : 50%;
+    display         : flex;
+    flex-direction  : row;
+    justify-content : center;
+    align-items     : center;
 
-}
-.menu-open:hover{
-    color: var(--highlight-translucid-2);
-    background-color: rgba(255, 255, 255, 0.8);
-}
-
-.menu-close{
-    display: none;
-    position: absolute;
-    width: fit-content;
-    color: rgba(255, 255, 255, 0.8);
-    top: 5px;
-    right:  10px;
-    width: 50px;
-    height: 50px;
-    font-size: 45px ;
+    width      : 50px;
+    height     : 50px;
+    font-size  : 45px;
     line-height: 40px;
-    z-index: 7;
+    box-shadow : 0px 0px 5px 0px;
+    z-index: 99;
+}
+
+
+.article {}
+
+.menu-close {
+    position   : absolute;
+    width      : fit-content;
+    color      : rgba(255, 255, 255, 0.8);
+    top        : 5px;
+    left       : 230px;
+    width      : 50px;
+    height     : 50px;
+    font-size  : 45px;
+    line-height: 40px;
+    z-index    : 7;
 
 }
-.menu-close:hover{
+
+.menu-close:hover {
     color: white;
 }
+
 @keyframes loading {
     0% {
         transform: rotate(0);
@@ -513,54 +518,8 @@ input {
         transform: rotate(360deg);
     }
 }
-@media screen and (max-width: 980px) {
-  /*  .main {
-        position: relative;
-        width   : 100vw;
-        height  : max-content;
-        margin:0px 20px 0px 20px;
-        padding: 30px 0px 30px 0px;
-        max-width       : calc(100% - 40px);
-    }
 
-    .menu-close,
-    .menu-open{
-        display: flex;
-    }
-    .menu {
-        margin  : 0 auto;
-        margin-left:-500px;
-        position: fixed;
-        height: 100vh;
-        max-width: calc(100% - 50px);
-        z-index: 6;
-
-    }*/
-    .main {
-        position: relative;
-        width   : 100vw;
-        height  : max-content;
-        margin:0px 20px 0px 20px;
-        padding: 30px 0px 30px 0px;
-        max-width       : calc(100% - 40px);
-    }
-    
-
-    .menu-close,
-    .menu-open{
-        display: flex;
-    }
-    .menu {
-        display: none;
-        margin-left  : 50px;
-        position: fixed;
-        height: 100vh;
-        max-width: calc(100% - 50px);
-        z-index: 6;
-
-    }
-
-}
+@media screen and (max-width: 980px) {}
 
 
 .background {
@@ -594,5 +553,5 @@ input {
     max-width : 100%;
     height    : 100vh;
     max-height: 100%;
+    z-index   : -1;
 }
-

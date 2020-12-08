@@ -2,13 +2,10 @@ $(document).ready(function () {
     $(".search > input").keyup(function (event) {
         showTags(text = $(this).val());
     });
-    $(window).on("resize", function(event){
-        if($(this).width() > 980){
-            if (!$('.menu').is(":visible"))
-                $('.menu').show(200);
-
-        }
-      });
+    $(window).on("resize", function (event) {
+        checkWindowSize(this);
+    });
+    checkWindowSize($(window));
 });
 
 $(document).on('click', '.tags > .selected > li > a', function () {
@@ -138,22 +135,46 @@ function changeNav(nav) {
 
 
 
-function openMenu(){   
+function openMenu() {
     /*$('.menu-open').hide(200, function(){
         $(".menu").animate({ marginLeft: '50px' }, 500 );
         $(".main").animate({ marginLeft: '380px' }, 500 );
 
     });*/
-    $('.menu-open').hide(200, function(){
-        $(".menu").show( 500 );
-        $(".main").animate({ marginLeft: '380px' }, 500 );
+    $('.menu-open').hide(200, function () {
+        $(".menu").show(500, function () {
+            $(".menu-close").show(200);
+        });
+        $(".main").animate({ marginLeft: '370px', width: 'calc(100% - 80px)' }, 500);
 
     });
 };
-function closeMenu(){   
-    $(".menu").hide( 500 )
-    $(".main").animate({ marginLeft: '20px' }, 500 , function(){
-       $('.menu-open').show(200);
-    });
+//width  : calc(100% - 410px);
+function closeMenu() {
+    $(".menu").hide(500);
 
+    $(".main").animate({ marginLeft: '0px', width: '100%' }, 500, function () {
+        $('.menu-open').show(200);
+    });
 };
+
+function checkWindowSize(win){
+    if ($(win).width() > 980) {
+        if (!$('.menu').is(":visible"))
+            $('.menu').show();
+            
+        $(".menu-close").hide();
+        $(".menu-open").hide();
+        $('.main').css("width", "100%").css('width', '-=410px');
+        $('.main').css("margin-left", "370px");
+
+    }
+    else {
+        if ($('.menu').is(":visible"))
+            $('.menu').hide();
+
+        $(".menu-open").show();
+        $('.main').css("width", "100%");
+        $('.main').css("margin-left", "0px");
+    }
+}
