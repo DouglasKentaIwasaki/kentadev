@@ -1,3 +1,6 @@
+const footer = {
+    text:  '<hr><label class="footer">© 2020 <a href="/">Douglas Kenta Iwasaki </a>. Todos os direitos reservados.</label>'
+};
 $(document).ready(function () {
     $(".search > input").keyup(function (event) {
         showTags(text = $(this).val());
@@ -18,6 +21,11 @@ $(document).on('click', '.tags > .selected > li > a', function () {
 $(document).on('click', '.tags > .data > li > a', function () {
     removeDataItem(this);
     Data.loadBoxes(Data.getSelectedTags(), 0);
+});
+$(document).on('click', '.main > .article > .back', function () {
+    $('.main > .article').hide(300);
+    $('.main > .boxes').slideDown(300);
+    Nav.showLastNav();
 });
 
 
@@ -41,7 +49,7 @@ function showTags(text) {
 }
 
 function loadPage(page) {
-    changeNav('loader');
+    Nav.changeNav('loader');
     $.ajax({
         type: 'get',
         url: page,
@@ -49,7 +57,6 @@ function loadPage(page) {
             if (result != "") {
                 showPage(result);
             }
-            changeNav();
         },
         error: function () {
             /*adicionar mensagem de erro*/
@@ -58,55 +65,17 @@ function loadPage(page) {
 }
 
 function showPage(page) {
-    $('.main > .article').html(page);
+    $('.main > .article').html(page + footer.text);
+
     if (!$('.main > .article').is(":visible"))
         $('.main > .article').slideDown(300);
     if ($('.main > .boxes').is(":visible"))
-        $('.main > .boxes').hide();
+        $('.main > .boxes').hide(300);
     if ($(window).width() <= 980)
         closeMenu();
+
+    Nav.changeNav();
 }
-
-
-function changeNav(nav, numberpage) {
-    if (nav == 'more') {
-        if (!$('.main > .more').is(":visible"))
-            $('.main > .more').slideDown(300);
-        if ($('.main > .loader').is(":visible"))
-            $('.main > .loader').hide();
-        if ($('.main > .finish').is(":visible"))
-            $('.main > .finish').hide();
-        if (numberpage != null)
-            $('.main > .more > .next').attr("href", "javascript:Data.loadBoxes(Data.getSelectedTags()," + numberpage + ");");
-    }
-    else
-        if (nav == 'loader') {
-            if ($('.main > .more').is(":visible"))
-                $('.main > .more').hide();
-            if (!$('.main > .loader').is(":visible"))
-                $('.main > .loader').slideDown(300);
-            if ($('.main > .finish').is(":visible"))
-                $('.main > .finish').hide();
-        }
-        else
-            if (nav == 'finish') {
-                if ($('.main > .more').is(":visible"))
-                    $('.main > .more').hide();
-                if ($('.main > .loader').is(":visible"))
-                    $('.main > .loader').hide();
-                if (!$('.main > .finish').is(":visible"))
-                    $('.main > .finish').slideDown(300);
-            } else {
-                if ($('.main > .more').is(":visible"))
-                    $('.main > .more').hide();
-                if ($('.main > .loader').is(":visible"))
-                    $('.main > .loader').hide();
-                if ($('.main > .finish').is(":visible"))
-                    $('.main > .finish').hide();
-            }
-}
-
-
 
 function openMenu() {
     /*$('.menu-open').hide(200, function(){
@@ -187,11 +156,11 @@ function removeDataItem(item) {
 }
 
 function searchTag(id) {
-    $('.tags > .selected > li').each(function(){
+    $('.tags > .selected > li').each(function () {
         removeSelectedItem($(this).children());
     });
 
-    $('.tags > .data > li').each(function(){
+    $('.tags > .data > li').each(function () {
         if (parseInt($(this).children().attr('id')) == id) {
             removeDataItem($(this).children());
             return 1;
@@ -199,4 +168,62 @@ function searchTag(id) {
     });
 
     Data.loadBoxes([{ id: id }], 0);
+}
+
+
+class Nav {
+
+    static setLastNav(lastNav) {
+        this.lastNav = lastNav;
+    }
+    static getLastNav(lastNav) {
+        this.lastNav = lastNav;
+    }
+    static showLastNav() {
+        if (this.getLastNav() != null)
+            this.getLastNav().slideDown(300);
+    }
+    static changeNav(nav, numberpage) {
+        if (nav == 'more') {
+            if (!$('.main > .more').is(":visible"))
+                $('.main > .more').slideDown(300);
+            if ($('.main > .loader').is(":visible"))
+                $('.main > .loader').hide();
+            if ($('.main > .finish').is(":visible"))
+                $('.main > .finish').hide();
+            if (numberpage != null)
+                $('.main > .more > .next').attr("href", "javascript:Data.loadBoxes(Data.getSelectedTags()," + numberpage + ");");
+            this.setLastNav($('.main > .more'));
+
+        }
+        else
+            if (nav == 'loader') {
+                if ($('.main > .more').is(":visible"))
+                    $('.main > .more').hide();
+                if (!$('.main > .loader').is(":visible"))
+                    $('.main > .loader').slideDown(300);
+                if ($('.main > .finish').is(":visible"))
+                    $('.main > .finish').hide();
+                this.setLastNav($('.main > .loader'));
+            }
+            else
+                if (nav == 'finish') {
+                    if ($('.main > .more').is(":visible"))
+                        $('.main > .more').hide();
+                    if ($('.main > .loader').is(":visible"))
+                        $('.main > .loader').hide();
+                    if (!$('.main > .finish').is(":visible"))
+                        $('.main > .finish').slideDown(300);
+                    this.setLastNav($('.main > .finish'));
+                } else {
+                    if ($('.main > .more').is(":visible"))
+                        $('.main > .more').hide();
+                    if ($('.main > .loader').is(":visible"))
+                        $('.main > .loader').hide();
+                    if ($('.main > .finish').is(":visible"))
+                        $('.main > .finish').hide();
+
+                    this.setLastNav(null);
+                }
+    }
 }
