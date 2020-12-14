@@ -271,7 +271,7 @@ input {
     transform-style: preserve-3d;
     position       : relative;
 
-    background-color: var(--highlight);
+    background-color: var(--highlight-translucid-2);
     border-radius   : 60px;
     width           : 110px;
     height          : 110px;
@@ -377,6 +377,9 @@ input {
 .main .text {
 
     margin-bottom: 20px;
+}
+.main .text + .title{
+    margin-top: 50px;
 }
 
 .main>.boxes>.box>.content>.tags {
@@ -569,11 +572,9 @@ input {
 
 main>.menu-open {
     position: fixed;
-    bottom  : 20px;
-    right   : 20px;
+    bottom  : 10px;
+    right   : 10px;
 
-    margin-top      : 10px;
-    margin-bottom   : 10px;
     background-color: white;
     color           : var(--highlight-translucid-2);
     border-radius   : 50%;

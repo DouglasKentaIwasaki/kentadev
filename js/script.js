@@ -66,11 +66,13 @@ function loadPage(page) {
 
 function showPage(page) {
     $('.main > .article').html(page + footer.text);
+    $('.main > .block').show();
 
-    if (!$('.main > .article').is(":visible"))
-        $('.main > .article').slideDown(300);
-    if ($('.main > .boxes').is(":visible"))
-        $('.main > .boxes').hide(300);
+        $('.main > .boxes').hide(300, function(){
+                $('.main > .article').slideDown(300, function(){
+                    $('.main > .block').hide();
+                });
+        });
     if ($(window).width() <= 980)
         closeMenu();
 
@@ -176,8 +178,8 @@ class Nav {
     static setLastNav(lastNav) {
         this.lastNav = lastNav;
     }
-    static getLastNav(lastNav) {
-        this.lastNav = lastNav;
+    static getLastNav() {
+        return this.lastNav;
     }
     static showLastNav() {
         if (this.getLastNav() != null)
@@ -204,7 +206,6 @@ class Nav {
                     $('.main > .loader').slideDown(300);
                 if ($('.main > .finish').is(":visible"))
                     $('.main > .finish').hide();
-                this.setLastNav($('.main > .loader'));
             }
             else
                 if (nav == 'finish') {
@@ -222,8 +223,6 @@ class Nav {
                         $('.main > .loader').hide();
                     if ($('.main > .finish').is(":visible"))
                         $('.main > .finish').hide();
-
-                    this.setLastNav(null);
                 }
     }
 }
