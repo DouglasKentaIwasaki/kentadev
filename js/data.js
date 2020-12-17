@@ -19,8 +19,6 @@ const data = {
             link: "pages/about.html",
             tags:
                 [
-                    { id: 1 },
-                    { id: 2 }
                 ]
         }
     ]
