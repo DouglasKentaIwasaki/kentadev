@@ -14,8 +14,8 @@ const data = {
         {
             id: 1,
             date: "25/10/2020",
-            title: "C e Algoritmo",
-            text: "Um texto teste apenas para testar a exibição do conteúdo",
+            title: "Sobre mim",
+            text: "Nessa minha primeira publicação conto um pouco sobre minha trajetória e meus objetivos em relação a esse blog.",
             link: "pages/about.html",
             tags:
                 [
