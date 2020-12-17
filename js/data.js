@@ -13,7 +13,7 @@ const data = {
     boxes: [
         {
             id: 1,
-            date: "25/10/2020",
+            date: "15/12/2020",
             title: "Sobre mim",
             text: "Nessa minha primeira publicação conto um pouco sobre minha trajetória e meus objetivos em relação a esse blog.",
             link: "pages/about.html",
