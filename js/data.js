@@ -2,15 +2,46 @@ const data = {
     tags: [
         {
             id: 1,
-            name: "C"
+            name: "HTML"
         },
         {
             id: 2,
-            name: "Algoritmo"
+            name: "CSS"
+        },
+        {
+            id: 3,
+            name: "JavaScript"
+        },
+        {
+            id: 4,
+            name: "JQuery"
         }
     ],
 
     boxes: [
+        {
+            id: 2,
+            date: "18/12/2020",
+            title: "Criando um calendário dinâmico utilizando JQuery",
+            text: "Vamos ver uma maneira simples de criar um calendário responsivo para adicionar em sua página web.",
+            link: "pages/article/02.html",
+            tags:
+                [
+                    
+                    {
+                        id: 1
+                    },
+                    {
+                        id: 2
+                    },
+                    {
+                        id: 3
+                    },
+                    {
+                        id: 4
+                    }
+                ]
+        },
         {
             id: 1,
             date: "15/12/2020",

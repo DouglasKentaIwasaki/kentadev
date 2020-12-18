@@ -1,0 +1,210 @@
+<a class="back"><i class="icon-left-arrow"></i>Voltar</a>
+<div class="title">Criando um calendário dinâmico utilizando JQuery</div>
+<hr>
+<label class="date">18-12-2020</label>
+<p class="text">Estou desenvolvendo um sistema e me deparei com uma função que deve conter um calendário para auxiliar
+    na navegação da página.</p>
+<p class="text">Não queria utilizar o a tag html <code>&lt;input type="date"/&gt;</code> pois seu layout não se
+    encaixaria muito bem com a proposta sistema. </p>
+<p class="text">Para deixa-lo mais elegante decidi implementar meu próprio calendário utilizando JQuery, HTML e CSS.</p>
+<p class="text">Antes de tudo devemos adicionar em nossa página a biblioteca JQuery. Para fazermos isso devemos baixar
+    no diretório de nosso projeto o arquivo JS disponível nesse link.</p>
+<p class="text"><a href="https://code.jquery.com/jquery-3.5.1.min.js "
+        target="_blank">https://code.jquery.com/jquery-3.5.1.min.js</a></p>
+<p class="text">Logo após devemos importar para a nossa página HTML da seguinte maneira:</p>
+<pre><code>&lt;script src="libs/jquery/jquery-3.5.1.min.js"&gt&lt;/script&gt </code></pre>
+<p class="text">Agora iremos criar a estrutura de nosso calendário. Optei por utilizar a estrutura de listas disponível
+    no HTML.</p>
+<pre><code>&ltdiv class="container calendar"&gt
+    &ltul class="year"&gt
+        &ltli class="back"&gt
+            &lta&gt❮&lt/a&gt
+        &lt/li&gt
+        &ltli class="description"&gt&lt/li&gt
+        &ltli class="next"&gt
+            &lta&gt❯&lt/a&gt
+        &lt/li&gt
+    &lt/ul&gt
+    &ltul class="month"&gt
+        &ltli class="back"&gt
+            &lta&gt❮&lt/a&gt
+            &lt/li&gt
+        &ltli class="description"&gt&lt/li&gt
+        &ltli class="next"&gt
+            &lta&gt❯&lt/a&gt
+        &lt/li&gt
+    &lt/ul&gt
+    &ltul class="week"&gt
+        &ltli&gtdom&lt/li&gt
+        &ltli&gtseg&lt/li&gt
+        &ltli&gtter&lt/li&gt
+        &ltli&gtqua&lt/li&gt
+        &ltli&gtqui&lt/li&gt
+        &ltli&gtsex&lt/li&gt
+        &ltli&gtsab&lt/li&gt
+    &lt/ul&gt
+    &ltul class="days"&gt
+    &lt/ul&gt
+&lt/div&gt</code></pre>
+<p class="text">Ao adicionar esse código vemos que nosso calendário ainda não está com uma cara muito boa, por isso
+    devemos fazer
+    algumas alterações com CSS. Crie um arquivo CSS na pasta de seu projeto e adicione os seguintes códigos:</p>
+<pre><code>.calendar {
+    width: fit-content;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.calendar ul,
+.calendar li {
+    list-style: none;
+    margin    : 0;
+    padding   : 0;
+}
+
+.calendar a {
+    cursor: pointer;
+}
+
+.calendar .description,
+.calendar>.week {
+    cursor: default;
+}
+
+.calendar>.year {
+    display        : flex;
+    justify-content: space-between;
+}
+
+.calendar>.month {
+    display        : flex;
+    justify-content: space-between;
+}
+
+.calendar>.week {
+    display        : flex;
+    justify-content: space-around;
+}
+
+.calendar>.week>li {
+    text-align: center;
+    min-width : 35px;
+}
+
+.calendar>.days {
+    width                : 100%;
+    display              : inline-grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.calendar>.days>li>a {
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    height         : 35px;
+    width          : 35px;
+    border-radius  : 50%;
+    margin         : 0 auto;
+}
+
+.calendar>.days>li>a:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+@media all and (max-width: 960px) {
+    .calendar {
+        width: calc(100% - 20px);
+    }
+}</code></pre>
+<p class="text">Para importar em sua página utilize o código abaixo: </p>
+<pre><code>&ltlink rel="stylesheet" type="text/css" href="style.css"&gt</code></pre>
+<p class="text">Feito isso só nos resta criar o script que irá alimentar e dar movimento as ações realizadas pelos
+    usuários.</p>
+<p class="text">Quero dividir essa parte em 3 etapas, na primeira vamos criar a estrutura para que o código funcione, na
+    segunda criaremos a função que irá de fato alterar os dados de nosso calendário, e por último iremos adicionar
+    eventos nos botões de alteração de data.</p>
+<p class="text">1 - Adicionando a estrutura inicial do nosso script</p>
+<p class="text">Devemos criar um arquivo JS e importar em nossa página HTML da seguinte maneira:</p>
+<pre><code>&ltscript src="script.js"&gt&lt/script&gt</code></pre>
+<p class="text">Logo após devemos adicionar o código abaixo como conteúdo desse arquivo. </p>
+<pre><code>$(document).ready(function () {
+    changeCalendar(new Date());
+});
+
+const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];</code></pre>
+<p class="text">Podemos notar que neste código criamos uma constante com o nome dos meses do ano, isso nos auxiliará na
+    hora de exibir esta informação. Além disso escrevemos uma chamada a uma função que criaremos na próxima etapa, note
+    que passamos por parâmetro um objeto <code>Date</code>, nele consta a data atual do sistema, isso irá carregar o mês
+    atual em nosso calendário logo após que nossa página terminar de ser carregada.</p>
+<p class="text">2 - Adicionando função de alteração de dados </p>
+<p class="text">Devemos adicionar o código abaixo ao final do arquivo criado na etapa anterior:</p>
+<pre><code>function changeCalendar(date) {
+    var year = $(".calendar &gt .year &gt .description");
+
+    if (year.val() != date.getFullYear()) {
+        year.html(date.getFullYear());
+        year.val(date.getFullYear())
+    }
+
+    var month = $(".calendar &gt .month &gt .description");
+    if (month.val() != date.getMonth()) {
+        month.html(monthNames[date.getMonth()]);
+        month.val(date.getMonth())
+    }
+
+    var last_day = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();;
+
+    date.setDate(1);
+    var first_day_week = (date.getDay() + 1);
+
+    var content = "";
+    var i;
+
+    for (i = (2 - first_day_week); i &lt 1; i++) {
+        content += "&ltli&gt&lt/li&gt";
+    }
+    while (i &lt= last_day) {
+        content += "&ltli&gt&lta&gt" + i + "&lt/a&gt&lt/li&gt";
+        i++;
+    }
+    $(".calendar &gt .days").html(content);
+}</code></pre>
+<p class="text">Está função está dividido em 4 partes, e seriam estas:</p>
+
+<ul class="text">
+    <li>Obtenção dos valores de Mês e Ano, e alteração dos mesmos caso necessário;</li>
+    <li>Criação de variáveis com valores que será necessário para controlar o preenchimento dos valores do campo Dia;
+    </li>
+    <li>Duas estruturas de repetição, a primeira delas adiciona em uma variável campos vazios que vão até o dia primeiro
+        do mês em questão, o segundo preenche o restante dos dias;</li>
+    <li>Adiciona o conteúdo da variável criada na etapa anterior em nosso calendário;</li>
+</ul>
+<p class="text">3 - Adicionando eventos nos botões</p>
+<p class="text">Nessa etapa o entendimento é bem simples. Criamos eventos de click para cada um dos botões em nosso
+    calendário e chamamos a função de alteração dos valores passando uma nova data atualizada.</p>
+<p class="text">O código abaixo deve ser inserido no arquivo de script criado nas etapas anteriores. </p>
+<pre><code>$(".calendar > .year > .back").click(function () {
+    var year = $(".calendar > .year > .description").val() - 1;
+    var month = $(".calendar > .month > .description").val() + 1;
+    changeCalendar(new Date(year, month, 0));
+});
+$(".calendar > .year > .next").click(function () {
+    var year = $(".calendar > .year > .description").val() + 1;
+    var month = $(".calendar > .month > .description").val() + 1;
+    changeCalendar(new Date(year, month, 0));
+});
+$(".calendar > .month > .back").click(function () {
+    var year = $(".calendar > .year > .description").val();
+    var month = $(".calendar > .month > .description").val();
+    changeCalendar(new Date(year, month, 0));
+});
+$(".calendar > .month > .next").click(function () {
+    var year = $(".calendar > .year > .description").val();
+    var month = $(".calendar > .month > .description").val() + 2;
+    changeCalendar(new Date(year, month, 0));
+});</code></pre>
+<p class="text">Esse é um preview do calendário que criamos nesta matéria: </p>
+
+<iframe src="/pages/article/02/index.html"></iframe>
+
+<p class="text">O código completo para este calendário está disponível em meu <a href="https://github.com/DouglasKentaIwasaki/calendar" target="_blank">github</a>.</p>

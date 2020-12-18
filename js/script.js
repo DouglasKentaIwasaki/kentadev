@@ -11,6 +11,12 @@ $(document).ready(function () {
     checkWindowSize($(window));
     Data.loadTags();
     Data.loadBoxes(Data.getSelectedTags(), 0);
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        document.querySelectorAll('pre code').forEach((block) => {
+          hljs.highlightBlock(block);
+        });
+      });
 });
 
 $(document).on('click', '.tags > .selected > li > a', function () {
